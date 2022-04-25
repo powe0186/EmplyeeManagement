@@ -30,18 +30,18 @@ VALUES  ('Sales Lead', 93000, 1),
 --Seed employees table--
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES  ('Heath', 'Ledger', 1, 14),
-        ('Julia', 'Stiles', 2, 1),
-        ('Joseph', 'Gordon-Levitt', 3, 1),
-        ('Larisa', 'Oleynik', 4, 14),
-        ('David', 'Krumholtz', 5, 4),
-        ('Andrew', 'Keegan', 5, 4),
-        ('Susan', 'May Pratt', 6, 4),
-        ('Gabrielle', 'Union', 7, 14),
-        ('Larry', 'Miller', 8, 7),
-        ('Daryl', 'Mitchell', 9, 7),
-        ('Allison', 'Janney', 10, 14),
-        ('David', 'Leisure', 11, 10),
-        ('Kyle', 'Cease', 12, 14),
-        ('William', 'Shakespeare', 6, 14)
+VALUES  ('William', 'Shakespeare', 6, null),
+        ('Heath', 'Ledger', 1, 1),
+        ('Julia', 'Stiles', 2, 2),
+        ('Joseph', 'Gordon-Levitt', 3, 2),
+        ('Larisa', 'Oleynik', 4, 1),
+        ('David', 'Krumholtz', 5, 5),
+        ('Andrew', 'Keegan', 5, 5),
+        ('Susan', 'May Pratt', 6, 5),
+        ('Gabrielle', 'Union', 7, 1),
+        ('Larry', 'Miller', 8, 8),
+        ('Daryl', 'Mitchell', 9, 8),
+        ('Allison', 'Janney', 10, 1),
+        ('David', 'Leisure', 11, 11),
+        ('Kyle', 'Cease', 12, 1)
 ;
