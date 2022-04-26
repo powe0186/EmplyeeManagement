@@ -1,13 +1,10 @@
 const mysql = require('mysql2');
 var inquirer = require('inquirer');
-const { mainMenuQuestion, addDepartmentQuestion } = require('./lib/questions');
+const { mainMenuQuestion, addDepartmentQuestion, addRoleQuestions } = require('./lib/questions');
 //const { mainMenuInquirer } = require('./lib/mainMenuInquirer');
-const { allDepts, allRoles, allEmployees, addDepartment } = require('./lib/queries');
+const { allDepts, allRoles, allEmployees, addDepartment, addRole, getDeptId } = require('./lib/queries');
 
 // Connect to database
-
-
-
 inquirer.prompt(mainMenuQuestion)
     .then((answer) => {
         console.log('You chose: ' + answer.mainSelection);
@@ -21,12 +18,14 @@ inquirer.prompt(mainMenuQuestion)
         switch (choice) {
             case 'View all departments.':
                 //Get the entire departments table.
-                allDepts();
+                allDepts()
+                    .then(([results, fields]) => console.table(results));
                 break;
 
             case 'View all roles.':
                 //get the entire roles table
-                allRoles();
+                allRoles()
+                    .then(([results, fields]) => console.table(results));
                 break;
 
             case 'View all employees.':
@@ -37,11 +36,21 @@ inquirer.prompt(mainMenuQuestion)
             case 'Add a department.':
                 // use inquirer to ask which department. Use that for query
                 inquirer.prompt(addDepartmentQuestion)
-                .then((ans) => {
-                    addDepartment(ans.newDept);
-                    console.log(`${ans.newDept} added to departments table.`)
-                })
-                .catch((err) => console.error(err));
+                    .then((ans) => {
+                        addDepartment(ans.newDept);
+                        console.log(`${ans.newDept} added to departments table.`)
+                    })
+                    .catch((err) => console.error(err));
+                break;
+
+            case 'Add a role.':
+                // use inquirer to ask which department. Use that for query
+                addRoleQuestions()
+                .then((questions) => {
+                inquirer.prompt(questions)})
+                .then((ans) =>{
+                    addRole(ans.role, ans.salary, getDeptId(ans.dept))
+                });
                 break;
         }
     })
