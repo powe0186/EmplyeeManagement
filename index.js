@@ -1,8 +1,8 @@
 const mysql = require('mysql2');
 var inquirer = require('inquirer');
-const { mainMenuQuestion, addDepartmentQuestion, roleQuestions, employeeQuestions } = require('./lib/questions');
+const { mainMenuQuestion, addDepartmentQuestion, roleQuestions, employeeQuestions, whichEmployee } = require('./lib/questions');
 //const { mainMenuInquirer } = require('./lib/mainMenuInquirer');
-const { allDepts, allRoles, allEmployees, addDepartment, addRole, addEmployee } = require('./lib/queries');
+const { allDepts, allRoles, allEmployees, addDepartment, addRole, addEmployee,updateEmployee } = require('./lib/queries');
 
 // Connect to database
 inquirer.prompt(mainMenuQuestion)
@@ -60,7 +60,15 @@ inquirer.prompt(mainMenuQuestion)
                         return;
                     })
                     .catch((err) => console.error(err));
-                break
+                break;
+            
+            //One more case - updating an employee's role.
+            case 'Update employee role.':
+                inquirer.prompt(whichEmployee)
+                .then((answers) => {
+                    updateEmployee(answers.employeeId, answers.newRole);
+                });
+                break;
                 
         }
     })
